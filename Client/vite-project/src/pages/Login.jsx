@@ -1,14 +1,34 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './LoginForm.css';
 
-function LoginForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+export default function LoginForm() {
+  const [data, setData] = useState({
+    email: '',
+    password: '',
+  });
+  
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log('Login attempt with:', email, password);
+    
+    try {
+      const response = await axios.post('http://localhost:5000/api/login', data);
+      console.log('Login successful:', response.data);
+      // Redirect or handle successful login here
+    } catch (err) {
+      console.error('Login error:', err);
+      setError('Invalid email or password');
+    }
   };
 
   return (
@@ -17,13 +37,15 @@ function LoginForm() {
         <h2 className="title">Welcome Back</h2>
         <p className="subtitle">Please login to continue</p>
         
+        {error && <p className="error-message">{error}</p>}
+        
         <div className="input-group">
           <label htmlFor="email">Email</label>
           <input 
             type="email" 
             id="email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
+            value={data.email} 
+            onChange={handleChange} 
             placeholder="Enter your email" 
             required 
           />
@@ -34,8 +56,8 @@ function LoginForm() {
           <input 
             type="password" 
             id="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
+            value={data.password} 
+            onChange={handleChange} 
             placeholder="Enter your password" 
             required 
           />
@@ -46,6 +68,4 @@ function LoginForm() {
       </form>
     </div>
   );
-}
-
-export default LoginForm;
+};
