@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
-import { toast } from 'react-hot-toast'; // Import toast for notifications
+import { toast } from 'react-hot-toast'; // For notifications
 
 export default function Register() {
   const navigate = useNavigate();
@@ -25,43 +25,46 @@ export default function Register() {
     e.preventDefault();
     const { name, email, password } = data;
 
-    // Simple front-end validation
+    // Frontend validation
     if (!name || !email || !password) {
       toast.error('All fields are required.');
       return;
     }
-
     if (password.length < 6) {
       toast.error('Password must be at least 6 characters long.');
       return;
     }
 
     try {
-      // Show a loading toast
       toast.loading('Registering user...');
       const response = await axios.post('http://localhost:5000/api/register', data);
 
-      // Handle success
-      toast.dismiss(); // Dismiss the loading toast
+      // Success
+      toast.dismiss(); // Dismiss loading
       toast.success('Registration successful!');
-      console.log('User registered successfully:', response.data);
+      console.log('User registered:', response.data);
 
-      // Redirect to the dashboard
-      navigate('/dashboard');
+      navigate('/dashboard'); // Redirect to dashboard
     } catch (error) {
-      // Handle error
-      toast.dismiss(); // Dismiss the loading toast
-      const errorMessage = error.response?.data?.message || 'Registration failed. Please try again.';
-      toast.error(errorMessage);
-      console.error('Registration error:', error);
+      toast.dismiss(); // Dismiss loading
+      if (error.response) {
+        console.error('Response error:', error.response.data);
+        toast.error(error.response.data.message || 'Registration failed.');
+      } else if (error.request) {
+        console.error('Request error:', error.request);
+        toast.error('Server did not respond. Please try again.');
+      } else {
+        console.error('Error:', error.message);
+        toast.error('An unexpected error occurred. Please try again.');
+      }
     }
   };
 
   return (
     <div className="register-container">
       <form onSubmit={registerUser} className="register-form">
-        <h2 className="title">Create Account</h2>
-        <p className="subtitle">Join us and start your journey</p>
+        <h2>Create Account</h2>
+        <p>Join us and start your journey</p>
 
         <div className="input-group">
           <label htmlFor="name">Name</label>
@@ -99,10 +102,8 @@ export default function Register() {
           />
         </div>
 
-        <button type="submit" className="register-button">
-          Sign Up
-        </button>
-        <p className="login-text">
+        <button type="submit" className="register-button">Sign Up</button>
+        <p>
           Already have an account? <a href="/login">Log in</a>
         </p>
       </form>
