@@ -1,18 +1,126 @@
+/* Dashboard container */
 .dashboard-container {
   padding: 20px;
+  background: #f4f7fc;
+  min-height: 100vh;
+  font-family: 'Arial', sans-serif;
+  color: #333;
 }
 
+/* Section styling */
 .section {
+  margin-bottom: 20px;
+}
+
+/* Heading styles */
+h2 {
+  font-size: 26px;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Box styles for AI Checker and AI Generator */
+.box-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.box {
+  flex: 1;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Title and description for each box */
+.box h3 {
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 15px;
+  color: #4a90e2;
+}
+
+.box p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Button styling inside boxes */
+.box .cta-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4a90e2;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-top: 20px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.box .cta-button:hover {
+  background-color: #357ab8;
+  transform: scale(1.05);
+}
+
+/* Input field styling (form inside each box) */
+.form-group {
   margin-bottom: 20px;
 }
 
 form label {
   display: block;
+  font-size: 14px;
   margin-bottom: 10px;
+  color: #333;
 }
 
-textarea {
+form input, form textarea {
   width: 100%;
-  height: 100px;
-  margin-bottom: 10px;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form input:focus, form textarea:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 8px rgba(74, 144, 226, 0.3);
+}
+
+/* Textarea styling */
+textarea {
+  height: 120px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .box-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .box {
+    max-width: 100%;
+  }
+
+  .box h3 {
+    font-size: 20px;
+  }
+
+  .box p {
+    font-size: 13px;
+  }
 }

@@ -7,7 +7,7 @@ export default function HomePage() {
     <div className="homepage">
       <header className="header">
         <h1 className="website-name">AI Evaluation</h1>
-        <nav className="nav">
+        <nav className="nav" aria-label="Main navigation">
           <Link to="/login" className="nav-link">Login</Link>
           <Link to="/Register" className="nav-link">Sign Up</Link>
         </nav>

@@ -1,71 +1,152 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background: linear-gradient(to bottom right, #4a90e2, #14567a);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
+  min-height: 100vh;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Center the registration form on the page */
 .register-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f9f9f9;
+  padding: 1rem;
 }
 
+/* Registration form styling */
 .register-form {
-  background: #ffffff;
+  background-color: #ffffff;
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
+  border-radius: 12px;
+  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.register-form:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.15);
 }
 
 h2 {
   margin-bottom: 1rem;
-  font-size: 24px;
-  text-align: center;
+  font-size: 28px;
+  color: #333;
+  font-weight: 600;
 }
 
 p {
   margin-bottom: 2rem;
-  text-align: center;
   font-size: 14px;
-  color: #555555;
+  color: #555;
+  font-weight: 500;
 }
 
+/* Input group styling */
 .input-group {
   margin-bottom: 1.5rem;
+  text-align: left;
 }
 
 .input-group label {
   display: block;
   margin-bottom: 0.5rem;
   font-size: 14px;
-  color: #333333;
+  color: #333;
 }
 
 .input-group input {
   width: 100%;
-  padding: 0.8rem;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+.input-group input:focus {
+  border-color: #4a90e2;
+  box-shadow: 0px 0px 8px rgba(74, 144, 226, 0.5);
+}
+
+/* Register button styling */
 .register-button {
   width: 100%;
-  padding: 0.8rem;
-  background-color: #007bff;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #4a90e2;
   color: #ffffff;
   border: none;
-  border-radius: 4px;
-  font-size: 16px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .register-button:hover {
-  background-color: #0056b3;
+  background-color: #357ab8;
+  transform: scale(1.05);
+  box-shadow: 0px 12px 32px rgba(0, 0, 0, 0.15);
 }
 
+.register-button:active {
+  transform: scale(1);
+}
+
+/* Link styling for login */
 a {
-  color: #007bff;
+  color: #4a90e2;
   text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 a:hover {
+  color: #357ab8;
   text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .register-form {
+    padding: 1.5rem;
+    max-width: 90%;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .register-button {
+    font-size: 14px;
+  }
 }
